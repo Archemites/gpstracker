@@ -1,0 +1,287 @@
+/* ==========================================================================
+ * Identidade visual — T7 Solutions
+ * Azul-marinho (logo "Solutions"), degradê verde→teal (o "7") e cinza (slogan)
+ * ========================================================================== */
+:root {
+    --azul: #2f7fd1;          /* azul da marca (clareado p/ fundo escuro) */
+    --azul-escuro: #1b4f91;   /* hover */
+    --verde: #6cc24a;         /* verde do "7" */
+    --teal: #17c3bf;          /* teal do "7" (clareado) */
+    --grad: linear-gradient(135deg, var(--verde) 0%, var(--teal) 100%);
+    --cinza: #9aa4af;         /* texto secundário */
+
+    --fundo: #0d1117;         /* fundo geral (escuro) */
+    --cartao: #161b22;        /* cartões / barras */
+    --cartao-2: #1c232c;      /* itens dentro dos cartões */
+    --texto: #e6edf3;         /* texto principal */
+    --borda: #2a3139;
+    --sombra: 0 8px 32px rgba(0, 0, 0, 0.45);
+    --sucesso: #56d364;
+    --erro: #f47067;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--fundo);
+    color: var(--texto);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ---- Barra de status ---- */
+.barra-status {
+    background: var(--cartao);
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: var(--sombra);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    border-left: 4px solid var(--teal);
+}
+
+.status {
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.95em;
+}
+
+.status.online {
+    background: rgba(108, 194, 74, 0.15);
+    color: #3f8f2a;
+}
+
+.status.offline {
+    background: rgba(192, 57, 43, 0.12);
+    color: var(--erro);
+}
+
+.rotulo-servidor {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+    color: var(--cinza);
+    flex: 1;
+    min-width: 200px;
+    word-break: break-all;
+}
+
+.btn-reconectar {
+    padding: 8px 16px;
+    background: var(--azul);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.25s;
+}
+
+.btn-reconectar:hover {
+    background: var(--azul-escuro);
+}
+
+/* ---- Barra de adicionar à frota ---- */
+.barra-frota {
+    background: var(--cartao);
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: var(--sombra);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-left: 4px solid var(--verde);
+}
+
+.barra-frota input {
+    flex: 1;
+    min-width: 220px;
+    padding: 12px 15px;
+    border: 2px solid var(--borda);
+    border-radius: 6px;
+    font-size: 1em;
+    background: var(--cartao-2);
+    color: var(--texto);
+    transition: border-color 0.25s;
+}
+
+.barra-frota input::placeholder {
+    color: #6b7681;
+}
+
+.barra-frota input:focus {
+    outline: none;
+    border-color: var(--teal);
+}
+
+.btn-adicionar {
+    padding: 12px 22px;
+    background: var(--grad);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: filter 0.25s;
+}
+
+.btn-adicionar:hover {
+    filter: brightness(1.08);
+}
+
+.btn-adicionar:disabled {
+    filter: grayscale(0.6);
+    cursor: default;
+}
+
+.msg-frota {
+    font-size: 0.9em;
+    font-weight: bold;
+    min-width: 120px;
+}
+
+.msg-frota.ok {
+    color: var(--sucesso);
+}
+
+.msg-frota.falha {
+    color: var(--erro);
+}
+
+/* ---- Erro ---- */
+.erro {
+    background: rgba(192, 57, 43, 0.08);
+    color: var(--erro);
+    padding: 15px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--erro);
+    line-height: 1.5;
+}
+
+.oculto {
+    display: none;
+}
+
+/* ---- Layout principal ---- */
+.conteudo {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 1024px) {
+    .conteudo {
+        grid-template-columns: 1fr 320px;
+    }
+}
+
+.mapa-container {
+    background: #0f2027;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--sombra);
+    border: 1px solid var(--borda);
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 520px;
+}
+
+/* ---- Painel da frota ---- */
+.painel {
+    background: var(--cartao);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--sombra);
+    display: flex;
+    flex-direction: column;
+    max-height: 520px;
+    border: 1px solid var(--borda);
+}
+
+.painel-header {
+    background: var(--azul-escuro);
+    color: #fff;
+    padding: 15px;
+    font-weight: bold;
+    border-bottom: 3px solid transparent;
+    border-image: var(--grad) 1;
+}
+
+.painel-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.carro-item {
+    padding: 12px;
+    margin-bottom: 8px;
+    border-left: 4px solid var(--teal);
+    background: var(--cartao-2);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.carro-item:hover {
+    background: #232c36;
+}
+
+.carro-item.selecionado {
+    background: rgba(23, 195, 191, 0.14);
+    border-left-color: var(--verde);
+}
+
+.placa {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    font-family: 'Courier New', monospace;
+}
+
+.info {
+    font-size: 0.85em;
+    color: var(--cinza);
+    line-height: 1.5;
+}
+
+.velocidade {
+    color: var(--azul);
+    font-weight: bold;
+}
+
+.distancia {
+    color: var(--teal);
+    font-weight: bold;
+}
+
+.coords {
+    font-size: 0.8em;
+    margin-top: 5px;
+    color: #9aa4af;
+}
+
+.carregando {
+    text-align: center;
+    padding: 40px 20px;
+    color: #9aa4af;
+}

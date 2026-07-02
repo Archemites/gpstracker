@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastreador de Carros GPS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="barra-status">
+            <span class="status offline" id="status">● Conectando ao servidor…</span>
+            <span class="rotulo-servidor" id="rotuloServidor"></span>
+            <button id="btnReconectar" class="btn-reconectar" type="button">↻ Reconectar</button>
+        </div>
+
+        <div class="barra-frota">
+            <input type="text" id="inputId" placeholder="ID do veículo cadastrado (ex: CAR01)" autocomplete="off">
+            <button id="btnAdicionar" class="btn-adicionar" type="button">+ Adicionar à frota</button>
+            <span id="msgFrota" class="msg-frota"></span>
+        </div>
+
+        <div id="erro" class="erro oculto"></div>
+
+        <main class="conteudo">
+            <section class="mapa-container">
+                <canvas id="mapa"></canvas>
+            </section>
+
+            <aside class="painel">
+                <div class="painel-header" id="painelHeader">Frota (0)</div>
+                <div class="painel-content" id="listaCarros">
+                    <div class="carregando">Aguardando dados do servidor…</div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
